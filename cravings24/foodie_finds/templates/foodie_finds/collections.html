@@ -1,0 +1,56 @@
+{% extends 'foodie_finds/layouts/main.html' %}
+{% block 'title' %}
+registration page
+{% endblock 'title' %}
+
+{% block 'content' %}
+
+<section class="bd-light py-4 my-5">
+    <section class="py-5 text-center container" style="margin-top:10px;">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fn-light">FOODIE FINDS</h1>
+                <p> find your foods based on our categories</p>
+                {% if request.user.is_authenticated %}
+                {% else %}
+                <p>
+                    <a href="{% url 'login' %}" class="btn btn-primary my-2">already user</a>
+                    <a href="{% url 'reg' %}" class="btn btn-secondary my-2">register</a>
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">Categories</h4>
+                <hr style="border-color:#b8bfc2;">
+                {% include 'foodie_finds/inc/message.html' %}
+            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                  <li class="breadcrumb-item">Categories</li> 
+                </ol>
+            </nav>
+
+            {% for item in catagory %}
+            <div class="col-md-4 col-lg-3">
+                <div class="card my-3">
+                    
+                    <img src="{{item.image.url}}" class="card-image-top" alt="Categories">
+                    <a href="{% url 'collections' item.name %}">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{item.name}}</h5>
+                        <p class="card-text">{{item.description}}</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock 'content' %}

@@ -1,0 +1,59 @@
+{% extends 'foodie_finds/layouts/main.html' %}
+{% block 'title' %}
+registration page
+{% endblock 'title' %}
+
+{% block 'content' %}
+<div class="container" style="margin-top:70px;min-height:475px;">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mb-3">User Register</h3>
+            <hr style="border-color:#b8bfc2">
+            {% include 'foodie_finds/inc/message.html' %}
+            
+        </div>
+    </div>
+    <section class="py-4 my-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <form method="post" action="">
+                    {% csrf_token %}   
+                    <div>
+                        <label for="" class="form-label">User Name</label>
+                        {{form.username}}
+                        {% if form.errors.username %}
+                        <label class="text-danger">{{form.errors.username}}</label>
+                        {% endif %}
+                    </div><br>
+                    <div>
+                        <label for="" class="form-label">User Email</label>
+                        {{form.email}}
+                        {% if form.errors.email %}
+                        <label class="text-danger">{{form.errors.email}}</label>
+                        {% endif %}
+                    </div><br>
+                    <div>
+                        <label for="" class="form-label">Password</label>
+                        {{form.password1}}
+                        {% if form.errors.password1 %}
+                        <label class="text-danger">{{form.errors.password1}}</label>
+                        {% endif %}
+                    </div><br>
+                    <div>
+                        <label for="" class="form-label">Confirm Password</label>
+                        {{form.password2}}
+                        {% if form.errors.password2 %}
+                        <label class="text-danger">{{form.errors.password2}}</label>
+                        {% endif %}
+                    </div><br>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                    <p class="my-2">Already User ?<a href="{% url 'login' %}">Login Now</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock 'content' %}
